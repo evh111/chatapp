@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const dateTime = require('simple-datetime-formater');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const chatRouter = require('./route/chatroute');
 const loginRouter = require('./route/loginroute');
@@ -12,8 +13,6 @@ const http = require('http').Server(app);
 
 // Require the 'socket.io' module
 const io = require('socket.io');
-
-const port = 5000;
 
 // Bodyparser middleware
 app.use(bodyParser.json());
@@ -69,6 +68,8 @@ socket.on('connection', socket => {
   });
 });
 
-http.listen(port, () => {
-  console.log('Running on Port: ' + port);
+const PORT = process.env.PORT || 5000;
+
+http.listen(PORT, () => {
+  console.log('Running on Port: ' + PORT);
 });
